@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Flutter Mirror MCP Server.
-Tools for managing Android emulators, screen mirroring, and Flutter dev workflow.
+Android Mirror MCP Server.
+Tools for managing Android devices, screen mirroring, and Flutter dev workflow.
 """
 
 import asyncio
@@ -30,7 +30,7 @@ flutter_proc = None
 flutter_log_fh = None
 target_serial = None  # ADB serial of the target device (emulator or physical)
 
-mcp = FastMCP("flutter-mirror")
+mcp = FastMCP("android-mirror")
 
 
 async def run_adb(*args):

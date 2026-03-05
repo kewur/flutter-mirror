@@ -1,8 +1,8 @@
-# Flutter Mirror
+# Android Mirror
 
-See and control your Android device from your phone's browser over Tailscale — so you can develop Flutter apps remotely from bed, a cafe, or anywhere with an internet connection.
+See and control your Android device from your phone's browser over Tailscale — from bed, a cafe, or anywhere with an internet connection.
 
-Stream your Android device screen to a web browser, interact with it via touch, and manage Flutter builds — all orchestrated through an MCP server that AI agents (like Claude) can use.
+Stream your Android device screen to a web browser and interact with it via touch. Includes an MCP server so AI agents (like Claude) can manage the device, run Flutter builds, take screenshots, and more.
 
 ## How it works
 
@@ -57,8 +57,8 @@ sudo apt install imagemagick xdotool python3 python3-venv
 ### 2. Clone and run
 
 ```bash
-git clone https://github.com/kewur/flutter-mirror.git
-cd flutter-mirror
+git clone https://github.com/kewur/android-mirror.git
+cd android-mirror
 adb devices  # make sure your device is connected
 ./start.sh
 ```
@@ -81,8 +81,8 @@ claude mcp add \
   -e FLUTTER_PATH=~/Programs/flutter/bin/flutter \
   -s user \
   flutter-mirror \
-  ~/flutter-mirror/.venv/bin/python3 \
-  ~/flutter-mirror/mcp_server.py
+  ~/android-mirror/.venv/bin/python3 \
+  ~/android-mirror/mcp_server.py
 ```
 
 This is a one-time setup. Every future Claude Code session on this machine will have the tools available. You can then SSH in from your phone, open Claude Code, and say things like *"make the login button blue and show me"* — Claude edits the code, hot reloads, and you see the result on the mirror.
