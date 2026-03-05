@@ -68,7 +68,7 @@
             transition: opacity 0.3s;
         }
         .status.connected { background: rgba(40,120,40,0.8); }
-        .status.disconnected { background: rgba(120,40,40,0.8); }
+        .status.disconnected { background: rgba(120,40,40,0.8); pointer-events: auto; cursor: pointer; }
         .status.connecting { background: rgba(120,120,40,0.8); }
         .fps {
             position: fixed;
@@ -141,6 +141,7 @@ const textBar = document.getElementById('textBar');
 const textInput = document.getElementById('textInput');
 
 let ws = null;
+let reconnectTimer = null;
 let frameCount = 0;
 let lastFpsTime = Date.now();
 
@@ -224,10 +225,10 @@ function connect() {
     };
 
     ws.onclose = () => {
-        statusEl.textContent = 'Disconnected';
+        statusEl.textContent = 'Disconnected — tap to reconnect';
         statusEl.className = 'status disconnected';
         statusEl.style.opacity = '1';
-        setTimeout(connect, 2000);
+        reconnectTimer = setTimeout(connect, 5000);
     };
 
     ws.onerror = () => ws.close();
@@ -325,6 +326,13 @@ textInput.addEventListener('keydown', (e) => {
     }
 });
 document.getElementById('textClose').onclick = () => textBar.classList.remove('visible');
+
+statusEl.addEventListener('click', () => {
+    if (statusEl.className.includes('disconnected')) {
+        if (reconnectTimer) clearTimeout(reconnectTimer);
+        connect();
+    }
+});
 
 connect();
 </script>
