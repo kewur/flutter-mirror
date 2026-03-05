@@ -1,8 +1,8 @@
 # Flutter Mirror
 
-Remote Android screen mirroring with touch input, designed for mobile Flutter development from anywhere.
+See and control your Android device from your phone's browser over Tailscale — so you can develop Flutter apps remotely from bed, a cafe, or anywhere with an internet connection.
 
-Stream your Android device screen to a web browser on your phone, interact with it via touch, and manage Flutter builds — all orchestrated through an MCP server that AI agents (like Claude) can use.
+Stream your Android device screen to a web browser, interact with it via touch, and manage Flutter builds — all orchestrated through an MCP server that AI agents (like Claude) can use.
 
 ## How it works
 
@@ -28,6 +28,7 @@ Stream your Android device screen to a web browser on your phone, interact with 
 
 ## Prerequisites
 
+- **[Tailscale](https://tailscale.com)** — on your desktop and phone for remote access
 - **Linux** with X11 (tested on Debian with i3wm)
 - **Android SDK** (adb) — or just platform-tools
 - **scrcpy** — download from [GitHub releases](https://github.com/Genymobile/scrcpy/releases)
