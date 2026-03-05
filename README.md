@@ -36,7 +36,25 @@ Stream your Android device screen to a web browser, interact with it via touch, 
 - **xdotool** — `apt install xdotool`
 - **Python 3.11+**
 
-## Quick start
+## Setup
+
+### 1. Install dependencies
+
+```bash
+# Tailscale (on both desktop and phone)
+curl -fsSL https://tailscale.com/install.sh | sh
+
+# System packages
+sudo apt install imagemagick xdotool python3 python3-venv
+
+# scrcpy — download from https://github.com/Genymobile/scrcpy/releases
+# Extract to ~/.local/share/scrcpy/ or anywhere you like
+
+# Android SDK platform-tools (adb)
+# https://developer.android.com/tools/releases/platform-tools
+```
+
+### 2. Clone and run
 
 ```bash
 git clone https://github.com/kewur/flutter-mirror.git
@@ -45,27 +63,29 @@ adb devices  # make sure your device is connected
 ./start.sh
 ```
 
-Then open `http://<your-ip>:8080` on your phone.
+The script auto-creates the Python venv on first run. Open `http://<tailscale-ip>:8080` on your phone.
 
-The script auto-creates the Python venv and installs dependencies on first run. Override defaults with env vars:
+Override defaults with env vars:
 
 ```bash
 SERIAL=emulator-5554 PORT=9090 ./start.sh
 ```
 
-### As an MCP server (for AI agents)
+### 3. Connect to Claude Code (optional, for AI-driven workflow)
 
-Register with Claude Code:
+This registers the MCP server so Claude can manage your emulator, mirror, and Flutter builds:
 
 ```bash
 claude mcp add \
-  -e ANDROID_HOME=/path/to/Android/Sdk \
-  -e FLUTTER_PATH=/path/to/flutter/bin/flutter \
+  -e ANDROID_HOME=~/Android/Sdk \
+  -e FLUTTER_PATH=~/Programs/flutter/bin/flutter \
   -s user \
   flutter-mirror \
-  /path/to/flutter-mirror/.venv/bin/python3 \
-  /path/to/flutter-mirror/mcp_server.py
+  ~/flutter-mirror/.venv/bin/python3 \
+  ~/flutter-mirror/mcp_server.py
 ```
+
+This is a one-time setup. Every future Claude Code session on this machine will have the tools available. You can then SSH in from your phone, open Claude Code, and say things like *"make the login button blue and show me"* — Claude edits the code, hot reloads, and you see the result on the mirror.
 
 Available MCP tools:
 
