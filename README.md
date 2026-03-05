@@ -35,33 +35,22 @@ Stream your Android device screen to a web browser on your phone, interact with 
 - **xdotool** — `apt install xdotool`
 - **Python 3.11+**
 
-## Setup
+## Quick start
 
 ```bash
-# Clone
 git clone https://github.com/kewur/flutter-mirror.git
 cd flutter-mirror
-
-# Create venv and install deps
-python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
-
-# Make sure your Android device is connected
-adb devices
-```
-
-## Usage
-
-### Standalone mirror server
-
-```bash
-.venv/bin/python3 mirror.py \
-  --adb /path/to/adb \
-  --scrcpy /path/to/scrcpy \
-  --serial DEVICE_SERIAL  # optional, defaults to first device
+adb devices  # make sure your device is connected
+./start.sh
 ```
 
 Then open `http://<your-ip>:8080` on your phone.
+
+The script auto-creates the Python venv and installs dependencies on first run. Override defaults with env vars:
+
+```bash
+SERIAL=emulator-5554 PORT=9090 ./start.sh
+```
 
 ### As an MCP server (for AI agents)
 
